@@ -228,9 +228,9 @@ const EditTextInputModal = ({
                             id="label"
                             value={checkbox.label}
                             onChange={(e) =>
-                              setRadioGroup((prev) =>
+                              setCheckBoxGroup((prev) =>
                                 prev.map((p) => {
-                                  if (p.id == radio.id) {
+                                  if (p.id == checkbox.id) {
                                     return { ...p, label: e.target.value };
                                   } else {
                                     return p;
@@ -246,9 +246,9 @@ const EditTextInputModal = ({
                             id="value"
                             value={checkbox.value}
                             onChange={(e) =>
-                              setRadioGroup((prev) =>
+                              setCheckBoxGroup((prev) =>
                                 prev.map((p) => {
-                                  if (p.id == radio.id) {
+                                  if (p.id == checkbox.id) {
                                     return { ...p, value: e.target.value };
                                   } else {
                                     return p;
@@ -504,12 +504,34 @@ const EditTextInputModal = ({
                         <td>
                           <input
                             value={option.name}
+                            onChange={(e) =>
+                              setOptions((prev) =>
+                                prev.map((p) => {
+                                  if (p.id == option.id) {
+                                    return { ...p, name: e.target.value };
+                                  } else {
+                                    return p;
+                                  }
+                                })
+                              )
+                            }
                             className="block outline-none border border-slate-300 rounded-md py-1 pl-1 focus:border-slate-400"
                           />
                         </td>
                         <td>
                           <input
                             value={option.value}
+                            onChange={(e) =>
+                              setOptions((prev) =>
+                                prev.map((p) => {
+                                  if (p.id == option.id) {
+                                    return { ...p, value: e.target.value };
+                                  } else {
+                                    return p;
+                                  }
+                                })
+                              )
+                            }
                             className="block outline-none border border-slate-300 rounded-md py-1 pl-1 focus:border-slate-400"
                           />
                         </td>

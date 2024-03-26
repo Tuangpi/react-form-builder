@@ -361,7 +361,10 @@ const App = () => {
                   );
                 case "checkbox-group":
                   return (
-                    <div className="flex justify-between items-start my-4">
+                    <div
+                      className="flex justify-between items-start my-4"
+                      key={index}
+                    >
                       <div
                         className="flex flex-col items-start my-4"
                         key={index}
