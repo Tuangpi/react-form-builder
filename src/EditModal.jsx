@@ -3,7 +3,9 @@ import Modal from "./Modal";
 import { useRef, useState } from "react";
 
 const EditModal = ({ show, close, maxWidth, handlePara, paraId }) => {
-  const [content, setContent] = useState("Paragraph");
+  const [content, setContent] = useState(
+    paraId.value || "Enter Your Paragraph"
+  );
   const editor = useRef(null);
 
   return (
@@ -24,9 +26,17 @@ const EditModal = ({ show, close, maxWidth, handlePara, paraId }) => {
             value={content}
             onChange={(newContent) => {
               setContent(newContent);
-              handlePara(newContent, paraId);
             }}
           />
+          <button
+            className="bg-blue-500 text-white rounded-md outline-none px-4 py-1 mt-6"
+            onClick={() => {
+              handlePara(content, paraId.id);
+              close();
+            }}
+          >
+            Update
+          </button>
         </div>
       </div>
     </Modal>

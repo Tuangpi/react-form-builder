@@ -68,6 +68,7 @@ const EditTextInputModal = ({
                     id="required"
                     type="checkbox"
                     value={required}
+                    checked={required}
                     onChange={(e) => setRequired((prev) => !prev)}
                     className="block"
                   />
@@ -155,6 +156,7 @@ const EditTextInputModal = ({
                     id="required"
                     type="checkbox"
                     value={required}
+                    checked={required}
                     onChange={(e) => setRequired((prev) => !prev)}
                     className="block outline-none border border-slate-300 rounded-md py-1 pl-1 focus:border-slate-400"
                   />

@@ -1,5 +1,4 @@
-import JoditEditor from "jodit-react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import EditModal from "./EditModal";
 import EditTextInputModal from "./EditTextInputModal";
 
@@ -35,7 +34,6 @@ const App = () => {
   };
 
   const handlePara = (newContent, paraId) => {
-    console.log(paraId);
     setDroppedElements((prev) =>
       prev.map((p) => {
         if (p.id === paraId) {
@@ -132,6 +130,7 @@ const App = () => {
       })
     );
   };
+
   const handleSave = (e) => {
     e.preventDefault();
     setShowForm(true);
@@ -195,12 +194,6 @@ const App = () => {
             onDragStart={(e) =>
               handleDragStart(e, {
                 type: "radio-group",
-                name:
-                  droppedElements.map((drop) => {
-                    if (drop.type === "radio-group") {
-                      return drop.name + 1;
-                    }
-                  }) || 1,
                 data: [
                   {
                     id: 0,
@@ -270,7 +263,7 @@ const App = () => {
                 case "textarea":
                   return (
                     <div
-                      className="flex justify-between items-start my-4"
+                      className="flex justify-between items-start my-2"
                       key={index}
                     >
                       <div className="flex flex-col w-11/12">
@@ -296,10 +289,10 @@ const App = () => {
                             )
                           }
                         >
-                          x
+                          &times;
                         </span>
                         <span
-                          className="bg-emerald-300 cursor-pointer px-2 rounded-md"
+                          className="bg-amber-400 cursor-pointer px-2 rounded-md"
                           onClick={() => {
                             setOpenEditModal(true);
                             setItem(item);
@@ -317,7 +310,7 @@ const App = () => {
                 case "text":
                   return (
                     <div
-                      className="flex justify-between items-start my-4"
+                      className="flex justify-between items-start my-2"
                       key={index}
                     >
                       <div className="flex flex-col w-11/12">
@@ -345,10 +338,10 @@ const App = () => {
                             )
                           }
                         >
-                          x
+                          &times;
                         </span>
                         <span
-                          className="bg-emerald-300 cursor-pointer px-2 rounded-md"
+                          className="bg-amber-400 cursor-pointer px-2 rounded-md"
                           onClick={() => {
                             setOpenEditModal(true);
                             setItem(item);
@@ -362,7 +355,7 @@ const App = () => {
                 case "checkbox-group":
                   return (
                     <div
-                      className="flex justify-between items-start my-4"
+                      className="flex justify-between items-start my-2"
                       key={index}
                     >
                       <div
@@ -374,52 +367,11 @@ const App = () => {
                             <input
                               className="outline-none border border-red-400 py-1"
                               type="checkbox"
+                              id={`checkbox${item.id}${i}`}
+                              name={"checkbox" + item.id}
                               value={item.value}
                             />
-                            <label>{data.label}</label>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="flex justify-between items-center space-x-2">
-                        <span
-                          className="bg-red-500 cursor-pointer px-2 rounded-md"
-                          onClick={() =>
-                            setDroppedElements((prev) =>
-                              prev.filter((p) => p.id !== item.id)
-                            )
-                          }
-                        >
-                          x
-                        </span>
-                        <span
-                          className="bg-emerald-300 cursor-pointer px-2 rounded-md"
-                          onClick={() => {
-                            setOpenEditModal(true);
-                            setItem(item);
-                          }}
-                        >
-                          edit
-                        </span>
-                      </div>
-                    </div>
-                  );
-                case "radio-group":
-                  return (
-                    <div className="flex justify-between items-start my-4">
-                      <div
-                        className="flex flex-col items-start my-4"
-                        key={index}
-                      >
-                        {item.data.map((data, i) => (
-                          <div className="flex items-center space-x-2" key={i}>
-                            <input
-                              className="outline-none border border-red-400 py-1"
-                              type="radio"
-                              name={"radio" + item.name}
-                              id={"radio" + item.name}
-                              value={data.value}
-                            />
-                            <label htmlFor={"radio" + item.name}>
+                            <label htmlFor={`checkbox${item.id}${i}`}>
                               {data.label}
                             </label>
                           </div>
@@ -434,10 +386,58 @@ const App = () => {
                             )
                           }
                         >
-                          x
+                          &times;
                         </span>
                         <span
-                          className="bg-emerald-300 cursor-pointer px-2 rounded-md"
+                          className="bg-amber-400 cursor-pointer px-2 rounded-md"
+                          onClick={() => {
+                            setOpenEditModal(true);
+                            setItem(item);
+                          }}
+                        >
+                          edit
+                        </span>
+                      </div>
+                    </div>
+                  );
+                case "radio-group":
+                  return (
+                    <div
+                      className="flex justify-between items-start my-2"
+                      key={index}
+                    >
+                      <div
+                        className="flex flex-col items-start my-4"
+                        key={index}
+                      >
+                        {item.data.map((data, i) => (
+                          <div className="flex items-center space-x-2" key={i}>
+                            <input
+                              className="outline-none border border-red-400 py-1"
+                              type="radio"
+                              name={"radio" + item.id}
+                              id={"radio" + item.id + i}
+                              value={data.value}
+                            />
+                            <label htmlFor={"radio" + item.id + i}>
+                              {data.label}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex justify-between items-center space-x-2">
+                        <span
+                          className="bg-red-500 cursor-pointer px-2 rounded-md"
+                          onClick={() =>
+                            setDroppedElements((prev) =>
+                              prev.filter((p) => p.id !== item.id)
+                            )
+                          }
+                        >
+                          &times;
+                        </span>
+                        <span
+                          className="bg-amber-400 cursor-pointer px-2 rounded-md"
                           onClick={() => {
                             setOpenEditModal(true);
                             setItem(item);
@@ -451,7 +451,7 @@ const App = () => {
                 case "select":
                   return (
                     <div
-                      className="flex justify-between items-start my-4"
+                      className="flex justify-between items-start my-2"
                       key={index}
                     >
                       <div className="flex flex-col w-11/12">
@@ -478,10 +478,10 @@ const App = () => {
                             )
                           }
                         >
-                          x
+                          &times;
                         </span>
                         <span
-                          className="bg-emerald-300 cursor-pointer px-2 rounded-md"
+                          className="bg-amber-400 cursor-pointer px-2 rounded-md"
                           onClick={() => {
                             setOpenEditModal(true);
                             setItem(item);
@@ -494,7 +494,10 @@ const App = () => {
                   );
                 case "button":
                   return (
-                    <div className="flex justify-between items-start my-4">
+                    <div
+                      className="flex justify-between items-start my-2"
+                      key={index}
+                    >
                       <div
                         className="flex flex-col items-start my-4 w-11/12"
                         key={index}
@@ -519,10 +522,10 @@ const App = () => {
                             )
                           }
                         >
-                          x
+                          &times;
                         </span>
                         <span
-                          className="bg-emerald-300 cursor-pointer px-2 rounded-md"
+                          className="bg-amber-400 cursor-pointer px-2 rounded-md"
                           onClick={() => {
                             setOpenEditModal(true);
                             setItem(item);
@@ -536,7 +539,7 @@ const App = () => {
                 case "paragraph":
                   return (
                     <div
-                      className="flex justify-between items-start"
+                      className="flex justify-between items-start my-2"
                       key={index}
                     >
                       <p
@@ -552,13 +555,13 @@ const App = () => {
                             )
                           }
                         >
-                          x
+                          &times;
                         </span>
                         <span
-                          className="cursor-pointer bg-emerald-300 px-2 rounded-md"
+                          className="cursor-pointer bg-amber-400 px-2 rounded-md"
                           onClick={() => {
                             setOpenParagraph(true);
-                            setParaId(item.id);
+                            setParaId(item);
                           }}
                         >
                           edit
