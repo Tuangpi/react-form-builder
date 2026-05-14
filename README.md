@@ -19,6 +19,10 @@ A simple drag-and-drop form builder built with React, Vite, and Tailwind CSS.
 - Headless UI
 - Jodit React editor
 
+## Live Demo
+
+[Live Demo](https://react-form-builder.singkhantuang97.workers.dev/)
+
 ## Getting Started
 
 ### 1. Install dependencies
