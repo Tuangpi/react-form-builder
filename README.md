@@ -21,7 +21,7 @@ A simple drag-and-drop form builder built with React, Vite, and Tailwind CSS.
 
 ## Live Demo
 
-[Live Demo](https://react-form-builder.singkhantuang97.workers.dev/)
+[Live Demo](https://form-builder.singkhantuang97.workers.dev/)
 
 ## Getting Started
 
